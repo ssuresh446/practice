@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=b5oQZdzA37I
+
+git init : converts  a directory into empty git repository
+git add : adds all the files or required files to staging area (index) from working area. only those files in the staging area are considered for commit but not all the modified files.
