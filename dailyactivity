@@ -1,0 +1,43 @@
+bought a pant and t-shirt in BF.
+CI/CD: https://www.youtube.com/watch?v=HjXTSbXG1k8 
+waterfall: developement takes 6month or 1year or more for giving entire software to client
+agile: rather than giving entire software , they give one service atleast in a week or 2,3 weeks
+devops:ci/cd concept, every developer code committed, build and tested.
+continuous delivery: after ci, deploy into mock servers which contain the same env like end users env. (production like env.) to ensure that the software work in production perfectly
+continuous deployment: this is actual deployment into production env. to the end users.
+
+<<<<<<< HEAD
+https://www.youtube.com/watch?v=xSv_m3KhUO8
+https://www.youtube.com/watch?v=93raARQl8PE
+================================================================================
+7th january 2020 : wanted to prepare int.Q. in jenkins regarding cd pipeline 
+=======
+23rd Jan 2020: 
+got a long gap, want to prepare continuously atleast from now onwards.
+starting git, github .. want to prepare well to attend interviews.
+avoid concentrating on politics and entertainment untill get a job.
+too much delay compared to friends and juniors also.
+24th Jan 2020: 
+not started prep. yesterday.
+now starting to watch git videos and simultaniously practice.
+/home/ansible-practice/Videos/git watching these videos.
+
+
+
+
+>>>>>>> a5f73b1f624d7abf22945188dd49fb44cc7cd54e
+
+
+
+
+
+
+
+
+
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/ssuresh446/dailyactiviti-repo.git
+git push -u origin master

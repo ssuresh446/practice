@@ -1,0 +1,71 @@
+1)we cant run our entire application in only one docker container, we cant.. if we can , no need of kubenernetes. here multi container means, same application but different containers to avoid single point of failure.single point of failure can be avoided by taking multiple containers of same application called redundancy.if one dies we can have other.
+
+2)application broken down into multiple self executing services (micro services).here multi container means, different micro servises for different containers. and getting communication btw all these containers.
+
+answer for above two points is k8s.
+
+kubernetes is container orchestration technology .
+
+in GCP and Azure , no need to install k8s just we need to say that we need k8s.
+
+rather than scaling and managing containers manually in docker swarm, everything can be done automatically by using k8s.
+
+for example: containers are like cattle in a group not like pet. if cattle dead we leave it and bring one more cattle. if the container dead we bring new container, but if containers continuously killing we need to fix it.
+
+for example: if we want to courier something , address is enough but need not to mention about how to courier in detail like which transport or something. k8s also like that only ,what to do only not how to do ...that is called manifest.
+
+most important task in k8s. we need to know how to write manifest file, we can manage k8s if we dont know anything except manifest also.
+
+couch doesnt play game, similarly manager doesnt host containers like in docker, just manages all nodes what to do.
+
+we give manifest to master/manager/incharge , it gets the work done by using nodes(called minions earlier) but it deosnt work.
+
+we can have multiple masters to have high availability. if one master goes down we can have another master and any number of nodes also, there is no limit.
+
+Master Components:
+master can be installed and works only on linux environment.
+
+nodes have pods. in k8s the smaller thing we can create is pod, like conta
+iners in dockers. pod is not = to docker container. bcz of this pod only k
+8s can work with multiple container technologies. pod contain docker conta
+iner, pods are always on nodes not on master.
+
+master has four components , kube API server ; Cluster Store ; kube-controller-manager ; kube-sceduler 
+
+1)kube API server: the request which we give in the form of manifest will be accepted by this API server, so it is responsible for communication from external world. we access kube API server from CLI or from Rest APIs
+
+2)Cluster Store: memory of master.whatever we do will be stored in this. if we remove cluster store k8s master forget everything. Cluster Store is key value store, specific with etcd key value.
+
+whenever we are making high available setups , there will be replication from this Cluster Store to another Cluster Store. if we want to make anothe master the first thing we need is memory. that is achived by replication from this Cluster Store to another Cluster Store.
+also called single source of truth.
+
+there is no seperate cloud servers for 2, 2 itself a data storing component.
+3)kube-controller-manager:
+this is responsible for the number of containers maintained. if one killed , brings another. it maintains the desired state if the manifest.
+
+4) kube-sceduler: 
+whenever we need new pod , 3 tell to 4 , and it gets the req. job
+
+only component which is visible is api server , whenever we use commands  we speak with it. 
+
+as on today all 4 on master, we may see the archetectural changes in future.
+
+we can call API server is the master because we can speak with only with this.
+
+Node/Minions three components:
+
+pod is an environment where containers can run
+
+nodes are also on Linux.
+
+1) Kubelet :
+the major k8s agent. this agent recieves communication from master. when we create k8s node , this is the first component that gets register.and whenever the master wants to speak with node , master communicates with kubelet.whenever we initiates the pod, the instruction will be send to kubelet and kubelet does the rest. if master is the sending one, this is the recieving one.it has some port numbers...
+
+2)Container Engine :
+container technology which we want to use. 
+2 may be docker or rocket , if the 2 is docker then our pods can have docker containers.
+
+3) Kube-proxy : 
+it is responsible networking, pod networking. every pod gets one ip address. if there are multuple containers in a pod, all those containers share a single IP. load balances accross all the pods in a service.
+
+
