@@ -2,3 +2,13 @@ https://www.youtube.com/watch?v=b5oQZdzA37I
 
 git init : converts  a directory into empty git repository
 git add : adds all the files or required files to staging area (index) from working area. only those files in the staging area are considered for commit but not all the modified files.
+git commit : records the changes made to the files in local repository. each commit has unique id, and message belong to changes happened
+git status : returns the current state of the repository
+git config : we can get the details of the commits occoured from which user
+git branch : 
+git remote : connect local repo with remote repo
+git clone: to create a local working copy of existing remote repo. we use it, it dowloads a local copy.
+it is equivalant to git init, when working with remote repo.
+git pull : it updates the already cloned files with the latest changes
+
+
