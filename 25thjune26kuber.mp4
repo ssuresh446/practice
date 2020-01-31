@@ -1,0 +1,102 @@
+Wednesday 29 January 2020 03:28:55 PM IST 
+
+manifest may be in yaml or json and giving
+ it to API server
+
+let manifest contains 3 pods whis has nginx
+ container. same state maintains in cluster
+ store. if one pod kills due to any reason,
+ this can be detected by kube controller manager.
+ now the available pods are 2 but actual state 
+is 3, then kube controller manager reports to 
+scheduler, then scheduler creates one more pod.
+no need to say, how to create but we should say 
+what to do, enough.
+
+if we want to change from 3 to 4 , tell to api 
+server using manifest... then controller reports 
+to scheduler then the scheduler creates one more.
+
+if we want to change from 3 to 1 , tell to api 
+server using manifest... then controller reports 
+to scheduler then the scheduler delete 2 pods.
+
+pod is an execution env. for containers. 
+
+best practice is pod should contain one container 
+even it supports for multiple containers. 
+
+if the pod contains two containers, both share 
+same network stack.every details same for 2 containers.
+but one container for one pod is best practice.
+
+if we scale pods, number of pods will be increased 
+but not containers in pod.
+
+docker lifecycle: created , started , stoped, removed: 
+simply running , stopped
+k8s lifecycle : it contains Pending(trying to start)
+(extra compared to docker), running , success/failure
+
+every pod have an ip address not container. so we cant 
+have 2 containers in the pod which require same port 
+number.because a pod has a one 80 or 8080 or etc..
+
+Services :
+consider we have 4 pods which are front end and 2 pods 
+which are databases. in the front end application 
+somewhere in a file we need to mention the ip address 
+of a database. if the database gone wrong by crashing 
+or by getting new version came, we get new IP address, 
+then the front end application of this database pod 
+also does not work so... the solution for this problem is service.
+
+
+we will create a service which is backend or db service. 
+this service also get ip address and service also speaking 
+to all of db machines. in front end application we mention 
+ip address of service not pod. even the pod died there is 
+no problem to front ent application bcz we mentioned 
+the ip of service not the ip of pod.
+
+when the pod died, other pod will be created automatically 
+and that new pod alos comes under same service.
+
+if we have 2 pods of v1 version of DB, if we want to update 
+to version v2, then first create a db pod and make the 
+assosiation with service and then shutdown v1. similarly 
+create one more v2 and associate with service and then 
+shutdown other v1. then we dont come accross downtime of application.
+
+this makes possible by using the concept of lables.
+
+after creating service, consider we have given some lables 
+to that serviceand when we create pods also we give lables. 
+now the pods which contain same lables of service comes under 
+that service. and the service load balances all the pods 
+which pods have same lables. but should be careful about lables.
+
+if the unwanted pod has same lable as service then also 
+that unwanted pod also comes under that service.
+
+every pod that want to come under a service should have all 
+the lables which the service has. the number of lables in 
+service should be equal or less than number of lables in pods. 
+pods may have lables which are not in service but 
+service should not have extra lable which pod has.
+
+all these details mentioned in manifest file.
+
+if the one pod under service fails or if we want to update 
+version then add the pod and give the lables according 
+to service then the pod automatically comes under that service.
+********************************************************************************
+GitHub Source Code======>build/compile/test/package=======>
+build image with build id as tag by using Dockerfile=====>
+push into image repo like dockerhub or whatever repo used by company
+ =======>now give this release to testing team for 
+executing environment=======>deployment by using k8s.
+********************************************************************************
+if we add one last step , that is publish to customer directly 
+then this process id called continuous deployment. but 
+without last step we call it as continuous delivery
